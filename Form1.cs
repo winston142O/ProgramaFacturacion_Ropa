@@ -183,7 +183,7 @@ namespace ProgramaFacturacion
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
-            string factura = String.Format("Facturar a:\n \nNombre: {0} \nTeléfono: {1} \nDirección: {2} \nFecha: {3} \n \nART. \t\tCANT. \tPRECIO",
+            string factura = String.Format("Facturar a:\n \nNombre: {0} \nTeléfono: {1} \nDirección: {2} \nFecha: {3} \n \nART. \t\tCANT. \tPRECIO \n",
                                  txtNombreCliente.Text, txtNumCliente.Text, txtDireccionCliente.Text, dateTimePicker1.Value.ToString());
             if (CantidadCamisas.Value > 0)
             {
