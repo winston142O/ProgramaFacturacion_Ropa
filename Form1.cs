@@ -34,8 +34,7 @@ namespace ProgramaFacturacion
         };        
         // totales
         private double totalOrden = 0.00;
-        private double PrecioNeto = 0.00;
-        
+        private double PrecioNeto = 0.00;        
 
         public Form1()
         {
@@ -60,58 +59,59 @@ namespace ProgramaFacturacion
             return subtotal;
         }
 
-        private void txtPrecioCamisa_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // si se presiona enter
-            if (e.KeyChar == enter || e.KeyChar == tabv || e.KeyChar == tabh)
-            {
-                e.Handled = false;
-                DialogResult resp = MessageBox.Show(String.Format("¿Deseas agregar el monto {0:F2} al total de esta orden?", txtSubtotalCamisa.Text), "Confirmar", MessageBoxButtons.YesNo);
-                if (resp == DialogResult.Yes)
-                {
-                    AddTotal(txtSubtotalCamisa, txtTotalOrden);
-                }
-                else if (resp == DialogResult.No)
-                {
-                    // nada
-                }
-            }
-            // si se presiona una de: numeros, punto, tabulador, backspace.
-            else if (numeros.Contains(e.KeyChar) || e.KeyChar == punto || e.KeyChar == tabv || e.KeyChar == tabh || e.KeyChar == backspace)
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
-
-        }        
-
         private void AddTotal(TextBox subtotalArticulo, TextBox destino)
         {
             string valorTexto = subtotalArticulo.Text;
             valorTexto = valorTexto.Replace("$", "");
             double subtotal = Convert.ToDouble(valorTexto);
-            totalOrden += subtotal;            
+            totalOrden += subtotal;
             destino.Text = String.Format("${0:F2}", totalOrden);
         }
 
-        private void txtPrecioPantalon_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtPrecioCamisa_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox objTextBox = (TextBox)sender;
+
             // si se presiona enter
             if (e.KeyChar == enter || e.KeyChar == tabv || e.KeyChar == tabh)
             {
                 e.Handled = false;
-                DialogResult resp = MessageBox.Show(String.Format("¿Deseas agregar el monto {0:F2} al total de esta orden?", txtSubtotalPantalon.Text), "Confirmar", MessageBoxButtons.YesNo);
-                if (resp == DialogResult.Yes)
+                if (objTextBox == txtPrecioCamisa)
                 {
-                    AddTotal(txtSubtotalPantalon, txtTotalOrden);
+                    DialogResult resp = MessageBox.Show(String.Format("¿Deseas agregar el monto {0:F2} al total de esta orden?", txtSubtotalCamisa.Text), "Confirmar", MessageBoxButtons.YesNo);
+                    if (resp == DialogResult.Yes)
+                    {
+                        AddTotal(txtSubtotalCamisa, txtTotalOrden);
+                    }
+                    else if (resp == DialogResult.No)
+                    {
+                        // nada
+                    }
                 }
-                else if (resp == DialogResult.No)
+                else if (objTextBox == txtPrecioPantalon)
                 {
-                    // nada
+                    DialogResult resp = MessageBox.Show(String.Format("¿Deseas agregar el monto {0:F2} al total de esta orden?", txtSubtotalPantalon.Text), "Confirmar", MessageBoxButtons.YesNo);
+                    if (resp == DialogResult.Yes)
+                    {
+                        AddTotal(txtSubtotalPantalon, txtTotalOrden);
+                    }
+                    else if (resp == DialogResult.No)
+                    {
+                        // nada
+                    }
                 }
+                else if (objTextBox == txtPrecioVestido)
+                {
+                    DialogResult resp = MessageBox.Show(String.Format("¿Deseas agregar el monto {0:F2} al total de esta orden?", txtSubtotalVestido.Text), "Confirmar", MessageBoxButtons.YesNo);
+                    if (resp == DialogResult.Yes)
+                    {
+                        AddTotal(txtSubtotalVestido, txtTotalOrden);
+                    }
+                    else if (resp == DialogResult.No)
+                    {
+                        // nada
+                    }
+                }                
             }
             // si se presiona una de: numeros, punto, tabulador, backspace.
             else if (numeros.Contains(e.KeyChar) || e.KeyChar == punto || e.KeyChar == tabv || e.KeyChar == tabh || e.KeyChar == backspace)
@@ -122,37 +122,8 @@ namespace ProgramaFacturacion
             {
                 e.Handled = true;
             }
-        }
 
-        private void txtPrecioVestido_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // si se presiona enter o tab
-            if (e.KeyChar == enter || e.KeyChar == tabv || e.KeyChar == tabh)
-            {
-                e.Handled = false;
-                DialogResult resp = MessageBox.Show(String.Format("¿Deseas agregar el monto {0:F2} al total de esta orden?", txtSubtotalVestido.Text), "Confirmar", MessageBoxButtons.YesNo);
-                if (resp == DialogResult.Yes)
-                {
-                    AddTotal(txtSubtotalVestido, txtTotalOrden);
-                }
-                else if (resp == DialogResult.No)
-                {
-                    // nada
-                }
-            }
-            // si se presiona una de: numeros, punto, tabulador, backspace.
-            else if (numeros.Contains(e.KeyChar) || e.KeyChar == punto || e.KeyChar == tabv || e.KeyChar == tabh || e.KeyChar == backspace)
-            {
-                e.Handled = false;
-            }
-            else if (e.KeyChar == letra_e || e.KeyChar == letra_E)
-            {
-            }
-            else
-            {
-                e.Handled = true;
-            }
-        }        
+        }                
 
         private void txtTotalOrden_TextChanged(object sender, EventArgs e)
         {
@@ -167,46 +138,48 @@ namespace ProgramaFacturacion
 
         private void txtPrecioCamisa_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                double precioCamisa = Convert.ToDouble(txtPrecioCamisa.Text);
-                double subtotal = CalcularSubtotal(precioCamisa, Convert.ToDouble(CantidadCamisas.Value));
-                txtSubtotalCamisa.Text = String.Format("${0:F2}", subtotal);
-            }
-            catch (Exception ex)
-            {
+            TextBox objTextBox = (TextBox)sender;
 
-            }
-            
-        }
-
-        private void txtPrecioPantalon_TextChanged(object sender, EventArgs e)
-        {
-            try
+            if (objTextBox == txtPrecioCamisa)
             {
-                double precioPantalon = Convert.ToDouble(txtPrecioPantalon.Text);
-                double subtotal = CalcularSubtotal(precioPantalon, Convert.ToDouble(CantidadPantalones.Value));
-                txtSubtotalPantalon.Text = String.Format("${0:F2}", subtotal);
-            }
-            catch (Exception e2)
-            {
+                try
+                {
+                    double precioCamisa = Convert.ToDouble(txtPrecioCamisa.Text);
+                    double subtotal = CalcularSubtotal(precioCamisa, Convert.ToDouble(CantidadCamisas.Value));
+                    txtSubtotalCamisa.Text = String.Format("${0:F2}", subtotal);
+                }
+                catch (Exception ex)
+                {
 
+                }
             }
-        }
-
-        private void txtPrecioVestido_TextChanged(object sender, EventArgs e)
-        {
-            try
+            else if (objTextBox == txtPrecioPantalon)
             {
-                double precioVestido = Convert.ToDouble(txtPrecioVestido.Text);
-                double subtotal = CalcularSubtotal(precioVestido, Convert.ToDouble(CantidadVestidos.Value));
-                txtSubtotalVestido.Text = String.Format("${0:F2}", subtotal);
-            }
-            catch (Exception e3)
-            {
+                try
+                {
+                    double precioPantalon = Convert.ToDouble(txtPrecioPantalon.Text);
+                    double subtotal = CalcularSubtotal(precioPantalon, Convert.ToDouble(CantidadPantalones.Value));
+                    txtSubtotalPantalon.Text = String.Format("${0:F2}", subtotal);
+                }
+                catch (Exception e2)
+                {
 
+                }
             }
-        }
+            else if (objTextBox == txtPrecioVestido)
+            {
+                try
+                {
+                    double precioVestido = Convert.ToDouble(txtPrecioVestido.Text);
+                    double subtotal = CalcularSubtotal(precioVestido, Convert.ToDouble(CantidadVestidos.Value));
+                    txtSubtotalVestido.Text = String.Format("${0:F2}", subtotal);
+                }
+                catch (Exception e3)
+                {
+
+                }
+            }                        
+        }        
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {

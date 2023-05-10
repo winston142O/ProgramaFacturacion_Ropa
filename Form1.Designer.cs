@@ -230,8 +230,8 @@
             this.txtPrecioVestido.Size = new System.Drawing.Size(85, 20);
             this.txtPrecioVestido.TabIndex = 11;
             this.txtPrecioVestido.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPrecioVestido.TextChanged += new System.EventHandler(this.txtPrecioVestido_TextChanged);
-            this.txtPrecioVestido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecioVestido_KeyPress);
+            this.txtPrecioVestido.TextChanged += new System.EventHandler(this.txtPrecioCamisa_TextChanged);
+            this.txtPrecioVestido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecioCamisa_KeyPress);
             // 
             // txtPrecioPantalon
             // 
@@ -241,8 +241,8 @@
             this.txtPrecioPantalon.Size = new System.Drawing.Size(85, 20);
             this.txtPrecioPantalon.TabIndex = 8;
             this.txtPrecioPantalon.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPrecioPantalon.TextChanged += new System.EventHandler(this.txtPrecioPantalon_TextChanged);
-            this.txtPrecioPantalon.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecioPantalon_KeyPress);
+            this.txtPrecioPantalon.TextChanged += new System.EventHandler(this.txtPrecioCamisa_TextChanged);
+            this.txtPrecioPantalon.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecioCamisa_KeyPress);
             // 
             // txtPrecioCamisa
             // 
