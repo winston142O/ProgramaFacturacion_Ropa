@@ -47,7 +47,7 @@ namespace ProgramaFacturacion
             txtSubtotalCamisa.Text = String.Format("${0:F2}", "0.00");
             txtSubtotalPantalon.Text = String.Format("${0:F2}", "0.00");
             txtSubtotalVestido.Text = String.Format("${0:F2}", "0.00");
-            txtTasaImpuestos.Text = String.Format("${0:F2}", "18.00");
+            txtTasaImpuestos.Text = String.Format("{0:F2}%", "18.00");
             txtTotalOrden.Text = String.Format("${0:F2}", "0.00");
             txtMontoImpuestos.Text = String.Format("${0:F2}", "0.00");
             txtPrecioNeto.Text = String.Format("${0:F2}", "0.00");            
